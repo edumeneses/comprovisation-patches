@@ -1,0 +1,23 @@
+#N canvas 630 73 613 528 10;
+#X obj 199 252 dac~;
+#X obj 229 18 adc~;
+#X obj 232 76 Vibrato(FM);
+#X obj 73 93 Tremolo(AM);
+#X obj 313 257 freeze;
+#X obj 413 191 *~;
+#X obj 477 67 vsl 15 128 0 10 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 2000 1;
+#X connect 1 0 2 0;
+#X connect 1 0 3 0;
+#X connect 1 0 5 0;
+#X connect 1 1 2 0;
+#X connect 1 1 3 0;
+#X connect 1 1 5 0;
+#X connect 2 0 0 0;
+#X connect 2 0 0 1;
+#X connect 3 0 0 0;
+#X connect 3 0 0 1;
+#X connect 4 0 0 0;
+#X connect 4 0 0 1;
+#X connect 5 0 4 0;
+#X connect 6 0 5 1;

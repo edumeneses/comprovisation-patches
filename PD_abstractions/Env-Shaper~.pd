@@ -1,0 +1,123 @@
+#N canvas 341 79 747 491 10;
+#X obj 103 103 cnv 15 85 107 empty empty Env-Shaper 4 12 0 14 -245149
+-116292 0;
+#X obj 112 129 vsl 25 55 0 1.5 0 0 \$0-env_shaper_send \$0-env_shaper_r
+empty 0 -9 0 10 -262144 -1 -1 1800 0;
+#X obj 154 159 tgl 18 0 \$0-env_shaper_bypass_r \$0-env_shaper_bypass_s
+Bypass -11 25 0 11 -262144 -1 -1 0 1;
+#X obj 146 139 nbx 3 14 0.01 1 1 1 \$0-env_shaper_PAN_r \$0-env_shaper_PAN_s
+PAN 0 -8 0 10 -191407 -116292 -116292 0.5 256;
+#X obj 117 193 bng 15 250 50 0 \$0-env_shaper_0db_r \$0-env_shaper_0db_s
+0dB 17 8 0 10 -262144 -1 -1;
+#X obj 380 292 outlet~;
+#X obj 430 292 outlet~;
+#X obj 213 153 - 1;
+#X obj 240 153 * -1;
+#X obj 393 265 *~;
+#X obj 423 265 *~;
+#X obj 329 8 inlet~;
+#X obj 295 45 cnv 15 100 60 empty empty Gate(0-1) 20 12 0 14 -233017
+-66577 0;
+#X obj 330 65 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 330 85 == 0;
+#X obj 302 85 *~;
+#X obj 365 85 *~;
+#X obj 302 164 *~;
+#X obj 317 120 \$1 20;
+#X obj 317 142 line~;
+#X msg 102 219 0.5;
+#X obj 35 173 loadbang;
+#X msg 144 37 0.5;
+#X text 350 379 Edu Meneses (2015);
+#X text 339 407 Released under GNU GPL;
+#X text 350 393 www.edumeneses.com;
+#X text 161 197 v1.0;
+#X obj 437 86 cnv 15 270 90 empty empty patch_Env-Shaper 20 12 0 14
+-232576 -66577 0;
+#N canvas 755 279 503 349 instructions 0;
+#X text -6164 -3007 Edu Meneses (2015);
+#X text -6175 -2979 Released under GNU GPL;
+#X text -6164 -2993 www.edumeneses.com;
+#X text -6369 -3265 comment;
+#X text -6293 -3230 To use this subpatch with external controllers
+send the command messages to mapping_commands:;
+#X text -6312 -3156 env_shaper:;
+#X text -6292 -3136 bypass: Turn the subpatch on and off (0 or 1).
+;
+#X text -6292 -3116 pan: control PAN (0 to 1 - L to R).;
+#X text -6292 -3096 0db: set gain to 0 dB (bang).;
+#X text -6292 -3076 control: control dynamic envelope (0 to 1.5).;
+#X restore 600 151 pd instructions;
+#X text 43 250 CAUTION: Test max volume before performance !!!;
+#X obj 77 286 bng 20 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 77 359 0;
+#X text 98 289 Click here to set max volume.;
+#X obj 77 314 bng 20 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X text 98 317 Click here to reset do default.;
+#X obj 122 359 r \$0-env_shaper_send;
+#X obj 449 129 r mapping_commands;
+#N canvas 242 306 502 277 patch_Env-Shaper 0;
+#X obj 44 120 s \$0-env_shaper_bypass_s;
+#X obj 167 191 s \$0-env_shaper_PAN_s;
+#X obj 126 167 s \$0-env_shaper_0db_s;
+#X obj 85 143 s \$0-env_shaper_r;
+#X obj 44 30 inlet;
+#X obj 44 56 route env_shaper;
+#X obj 44 83 route bypass control 0db pan;
+#X obj 233 47 loadbang;
+#X msg 233 71 set env_shaper;
+#X obj 233 98 s \$0-env_shaper_patch_mapping_default;
+#X obj 137 31 inlet;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 0 0;
+#X connect 6 1 3 0;
+#X connect 6 2 2 0;
+#X connect 6 3 1 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 10 0 5 1;
+#X restore 449 151 pd patch_Env-Shaper;
+#X symbolatom 570 130 15 0 0 2 address #0-env_shaper_patch_mapping_default
+-;
+#X obj 77 382 pack 0 0 \$0;
+#X msg 77 407 \; \$3-env_shaper_r range \$1 \$2;
+#X obj -8 382 pack 0 1.5 \$0;
+#X connect 1 0 18 0;
+#X connect 2 0 13 0;
+#X connect 3 0 7 0;
+#X connect 3 0 10 1;
+#X connect 4 0 20 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 1;
+#X connect 9 0 5 0;
+#X connect 10 0 6 0;
+#X connect 11 0 15 0;
+#X connect 11 0 16 0;
+#X connect 13 0 14 0;
+#X connect 13 0 16 1;
+#X connect 14 0 15 1;
+#X connect 15 0 17 0;
+#X connect 16 0 9 0;
+#X connect 16 0 10 0;
+#X connect 17 0 9 0;
+#X connect 17 0 10 0;
+#X connect 18 0 19 0;
+#X connect 19 0 17 1;
+#X connect 20 0 1 0;
+#X connect 21 0 20 0;
+#X connect 21 0 22 0;
+#X connect 21 0 41 0;
+#X connect 22 0 3 0;
+#X connect 30 0 31 0;
+#X connect 31 0 39 0;
+#X connect 33 0 41 0;
+#X connect 35 0 39 1;
+#X connect 36 0 37 0;
+#X connect 38 0 37 1;
+#X connect 39 0 40 0;
+#X connect 41 0 40 0;
+#X coords 0 -1 1 1 91 112 2 100 100;
